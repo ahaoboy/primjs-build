@@ -15,8 +15,10 @@ cd primjs
 source tools/envsetup.sh
 hab sync .
 
-gn gen out/Default --args= '
-  is_debug = false'
+# gn gen out/Default --args= '
+#   is_debug = false'
+
+gn gen out/Default
 
 ninja -C out/Default -j32 qjs_exe
 
