@@ -31,10 +31,6 @@ jobs:
     name: build-${{ matrix.target }}
     steps:
       - uses: actions/checkout@v4
-      - name: install gn
-        uses: ahaoboy/easy-setup@v1
-        with:
-          url: https://github.com/ahaoboy/gn-build
       - name: ubuntu install
         if: startsWith(matrix.os, 'ubuntu')
         run: |
