@@ -7,7 +7,9 @@ fi
 
 TARGET=$1
 
-git clone https://github.com/lynx-family/primjs
+# FIXME: buildroot clone error
+# git clone https://github.com/lynx-family/primjs
+git clone https://github.com/ahaoboy/primjs.git
 
 cd primjs
 source tools/envsetup.sh
