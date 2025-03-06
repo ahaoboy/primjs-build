@@ -7,18 +7,19 @@ fi
 
 TARGET=$1
 
-# FIXME: buildroot clone error
-# git clone https://github.com/lynx-family/primjs
-git clone https://github.com/ahaoboy/primjs.git
+git clone https://github.com/lynx-family/primjs
 
 cd primjs
 source tools/envsetup.sh
 hab sync .
 
-# gn gen out/Default --args= '
-#   is_debug = false'
+ARCH=$(uname -m)
 
-gn gen out/Default
+if [[ "$ARCH" == "arm"* || "$ARCH" == "aarch64" ]]; then
+    gn gen out/Default --args="target_cpu=\"arm64\" enable_primjs_snapshot=true enable_compatible_mm=true enable_tracing_gc=true"
+else
+    gn gen out/Default --args="enable_primjs_snapshot=true enable_compatible_mm=true enable_tracing_gc=true"
+fi
 
 ninja -C out/Default -j32 qjs_exe
 
